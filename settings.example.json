@@ -1,0 +1,122 @@
+{
+  "subagents": {
+    "commit": {
+      "description": "ALWAYS use this agent when running git commit. Creates commits with proper formatting. MUST write in English only.",
+      "model": "sonnet",
+      "tools": ["Bash"]
+    },
+    "pre-commit-checker": {
+      "description": "MUST run before every git commit. Uses difit to display diff and requires user review before proceeding.",
+      "model": "sonnet",
+      "tools": ["Bash(npx difit:*)", "Bash(git diff:*)"]
+    },
+    "pull-request": {
+      "description": "Create a pull request with proper formatting and review",
+      "model": "sonnet",
+      "tools": ["Bash"]
+    },
+    "security": {
+      "description": "Perform security analysis to identify vulnerabilities and suggest secure coding practices",
+      "model": "sonnet",
+      "tools": ["Grep", "LS", "Read", "Bash", "Glob"]
+    },
+    "review": {
+      "description": "Perform comprehensive code review focusing on quality, best practices, and potential issues",
+      "model": "sonnet",
+      "tools": ["Glob", "Grep", "LS", "Read", "NotebookRead", "WebFetch", "TodoWrite", "WebSearch"]
+    },
+    "typescript-test-generator": {
+      "description": "Generate comprehensive TypeScript and React tests using Jest and React Testing Library with DRY principles",
+      "model": "sonnet",
+      "tools": ["Bash", "Grep", "LS", "Glob", "Read", "Write"]
+    },
+    "go-test-generater": {
+      "description": "Generate comprehensive Go test code using table-driven patterns with proper test case organization",
+      "model": "sonnet",
+      "tools": ["Bash", "Grep", "LS", "Glob", "Read", "Write"]
+    },
+    "magi-melchior": {
+      "description": "MAGI System - Scientist perspective (technical accuracy, logic analysis)",
+      "model": "sonnet",
+      "tools": ["Read", "Grep", "Glob", "WebSearch", "WebFetch"]
+    },
+    "magi-balthasar": {
+      "description": "MAGI System - Mother perspective (ethics, conservatism)",
+      "model": "sonnet",
+      "tools": ["Read", "Grep", "Glob", "WebSearch", "WebFetch"]
+    },
+    "magi-casper": {
+      "description": "MAGI System - Realist perspective (implementation feasibility)",
+      "model": "sonnet",
+      "tools": ["Read", "Grep", "Glob", "WebSearch", "WebFetch"]
+    },
+    "github-analyzer": {
+      "description": "Fetch and analyze GitHub Issues and Pull Requests to extract structured information and insights",
+      "model": "sonnet",
+      "tools": ["Bash"]
+    },
+    "task-decomposer": {
+      "description": "Break down complex tasks into actionable todos and create structured implementation plans",
+      "model": "sonnet",
+      "tools": ["TodoWrite"]
+    },
+    "document": {
+      "description": "Generate comprehensive documentation for code, APIs, and systems",
+      "model": "sonnet",
+      "tools": ["Grep", "LS", "Read", "Write", "Bash", "WebFetch", "WebSearch"]
+    },
+    "drawio-diagram-generator": {
+      "description": "Generate draw.io diagrams from natural language descriptions with proper Japanese font support",
+      "model": "sonnet",
+      "tools": ["Read", "Write", "Edit", "Glob", "Grep", "Bash"]
+    },
+    "go-reviewer": {
+      "description": "Go language specialized code reviewer",
+      "model": "sonnet",
+      "tools": ["Read", "Grep", "Glob", "Bash"]
+    },
+    "typescript-reviewer": {
+      "description": "TypeScript/React specialized code reviewer",
+      "model": "sonnet",
+      "tools": ["Read", "Grep", "Glob", "Bash"]
+    },
+    "terraform-reviewer": {
+      "description": "Terraform/IaC specialized code reviewer",
+      "model": "sonnet",
+      "tools": ["Read", "Grep", "Glob", "Bash"]
+    },
+    "dbt-reviewer": {
+      "description": "dbt SQL specialized code reviewer",
+      "model": "sonnet",
+      "tools": ["Read", "Grep", "Glob", "Bash"]
+    },
+    "markdown-reviewer": {
+      "description": "Markdown documentation specialized reviewer",
+      "model": "sonnet",
+      "tools": ["Read", "Grep", "Glob"]
+    },
+    "test": {
+      "description": "Generate comprehensive test cases and improve test coverage for code",
+      "model": "sonnet",
+      "tools": ["Bash", "Grep", "LS", "Glob", "Read", "Write"]
+    },
+    "typescript-developer": {
+      "description": "Write type-safe TypeScript code following modern best practices",
+      "model": "sonnet",
+      "tools": ["Bash", "Grep", "LS", "Glob", "Read", "Write", "Edit"]
+    }
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "clear",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/on-clear.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
