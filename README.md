@@ -113,10 +113,49 @@ Add agents to `~/.claude/settings.json`. See `settings.example.json` for full co
 3. Review diff
 4. Run `commit` subagent
 
+## Recommended MCP Servers
+
+### Serena
+
+Semantic code analysis with symbol-level understanding.
+
+```bash
+claude mcp add -s user serena -- uvx --from git+https://github.com/oraios/serena serena-mcp-server --context ide-assistant
+```
+
+**Features:** Symbol search, reference finding, semantic code editing
+
+### Chrome DevTools
+
+Browser automation and debugging.
+
+```bash
+claude mcp add -s user chrome-devtools -- npx chrome-devtools-mcp@latest
+```
+
+**Features:** Page snapshots, click/fill actions, network inspection, screenshots
+
+### Context7
+
+Up-to-date documentation and code examples for libraries/frameworks.
+
+```bash
+# With API key (recommended)
+claude mcp add -s user context7 -- npx -y @upstash/context7-mcp --api-key YOUR_API_KEY
+
+# Without API key
+claude mcp add -s user context7 -- npx -y @upstash/context7-mcp
+```
+
+Get API key at [context7.com/dashboard](https://context7.com/dashboard)
+
+**Usage:** Add "use context7" to your prompts for latest documentation.
+
 ## Requirements
 
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code)
 - Optional: `npx difit` for visual diff
+- Optional: Context7 MCP for up-to-date docs
 
 ## Project Structure
 

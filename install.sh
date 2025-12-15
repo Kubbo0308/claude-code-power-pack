@@ -48,8 +48,9 @@ echo "  2) Agents only"
 echo "  3) Skills only"
 echo "  4) Commands only"
 echo "  5) Custom selection"
+echo "  6) MCP servers only"
 echo ""
-read -p "Choose option [1-5]: " INSTALL_OPTION
+read -p "Choose option [1-6]: " INSTALL_OPTION
 
 install_agents() {
     echo ""
@@ -116,12 +117,44 @@ install_hooks() {
     done
 }
 
+install_mcp_servers() {
+    echo ""
+    echo "🌐 Installing MCP servers..."
+
+    # Serena - Semantic code analysis
+    read -p "Install Serena MCP? (semantic code analysis) [y/N]: " ans
+    if [[ "$ans" =~ ^[Yy]$ ]]; then
+        claude mcp add -s user serena -- uvx --from git+https://github.com/oraios/serena serena-mcp-server --context ide-assistant
+        echo "  ✓ Added Serena MCP"
+    fi
+
+    # Chrome DevTools - Browser automation
+    read -p "Install Chrome DevTools MCP? (browser automation) [y/N]: " ans
+    if [[ "$ans" =~ ^[Yy]$ ]]; then
+        claude mcp add -s user chrome-devtools -- npx chrome-devtools-mcp@latest
+        echo "  ✓ Added Chrome DevTools MCP"
+    fi
+
+    # Context7 - Up-to-date documentation
+    read -p "Install Context7 MCP? (up-to-date docs) [y/N]: " ans
+    if [[ "$ans" =~ ^[Yy]$ ]]; then
+        read -p "  Enter Context7 API key (or press Enter to skip): " api_key
+        if [ -n "$api_key" ]; then
+            claude mcp add -s user context7 -- npx -y @upstash/context7-mcp --api-key "$api_key"
+        else
+            claude mcp add -s user context7 -- npx -y @upstash/context7-mcp
+        fi
+        echo "  ✓ Added Context7 MCP"
+    fi
+}
+
 case $INSTALL_OPTION in
     1)
         install_agents
         install_skills
         install_commands
         install_hooks
+        install_mcp_servers
         ;;
     2)
         install_agents
@@ -144,6 +177,12 @@ case $INSTALL_OPTION in
 
         read -p "Install hooks? [y/N]: " ans
         [[ "$ans" =~ ^[Yy]$ ]] && install_hooks
+
+        read -p "Install MCP servers? [y/N]: " ans
+        [[ "$ans" =~ ^[Yy]$ ]] && install_mcp_servers
+        ;;
+    6)
+        install_mcp_servers
         ;;
     *)
         echo "Invalid option. Exiting."
