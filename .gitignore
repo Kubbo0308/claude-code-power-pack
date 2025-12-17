@@ -22,3 +22,6 @@ Thumbs.db
 
 # Local settings (don't commit personal settings)
 settings.local.json
+
+# Serena MCP (local project memories)
+.serena/
