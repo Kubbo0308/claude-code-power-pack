@@ -25,3 +25,6 @@ settings.local.json
 
 # Serena MCP (local project memories)
 .serena/
+
+# Documentation drafts
+_docs/

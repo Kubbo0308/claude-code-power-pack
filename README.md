@@ -57,7 +57,23 @@ A toolkit of subagents, skills, and commands for [Claude Code](https://docs.anth
 
 ## Installation
 
-### Option 1: Symbolic Links (Recommended)
+### Option 1: /plugin Command (Recommended)
+
+Install directly within Claude Code session:
+
+```bash
+# Add marketplace
+/plugin marketplace add YOUR_USERNAME/claude-code-power-pack
+
+# Install plugin
+/plugin install power-pack@YOUR_USERNAME
+```
+
+That's it! No manual setup required.
+
+### Option 2: Manual Installation
+
+For local customization without plugin format:
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/claude-code-power-pack.git
@@ -65,7 +81,7 @@ cd claude-code-power-pack
 ./install.sh
 ```
 
-### Option 2: Manual Installation
+Or copy manually:
 
 ```bash
 cp -r agents/* ~/.claude/agents/
@@ -73,23 +89,6 @@ cp -r skills/* ~/.claude/skills/
 cp -r commands/* ~/.claude/commands/
 cp -r hooks/* ~/.claude/hooks/
 ```
-
-### Option 3: Selective Installation
-
-```bash
-# MAGI decision system only
-cp agents/magi-*.md ~/.claude/agents/
-cp commands/magi.md ~/.claude/commands/
-
-# Code review tools only
-cp agents/*-reviewer*.md ~/.claude/agents/
-cp -r skills/code-review ~/.claude/skills/
-cp commands/mr.md ~/.claude/commands/
-```
-
-## Configuration
-
-Add agents to `~/.claude/settings.json`. See `settings.example.json` for full configuration.
 
 ## Usage Examples
 
